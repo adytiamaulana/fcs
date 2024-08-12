@@ -1,0 +1,37 @@
+{
+  "annotations": {
+    "changelogDate": "20240812151403"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "branch",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "TaskHistory",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "personalInfo",
+      "relationshipName": "personalInfo",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "applicationStatus",
+      "relationshipName": "applicationStatus",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}
