@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (taskHistory()) {
+      <div>
+        <h2 data-cy="taskHistoryDetailsHeading"><span>Task History</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ taskHistory()!.id }}</span>
+          </dd>
+          <dt><span>Branch</span></dt>
+          <dd>
+            <span>{{ taskHistory()!.branch }}</span>
+          </dd>
+          <dt><span>Start Date</span></dt>
+          <dd>
+            <span>{{ taskHistory()!.startDate }}</span>
+          </dd>
+          <dt><span>End Date</span></dt>
+          <dd>
+            <span>{{ taskHistory()!.endDate }}</span>
+          </dd>
+          <dt><span>Personal Info</span></dt>
+          <dd>
+            @if (taskHistory()!.personalInfo) {
+              <div>
+                <a [routerLink]="['/personal-info', taskHistory()!.personalInfo?.id, 'view']">{{ taskHistory()!.personalInfo?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span>Application Status</span></dt>
+          <dd>
+            @if (taskHistory()!.applicationStatus) {
+              <div>
+                <a [routerLink]="['/application-status', taskHistory()!.applicationStatus?.id, 'view']">{{
+                  taskHistory()!.applicationStatus?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/task-history', taskHistory()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

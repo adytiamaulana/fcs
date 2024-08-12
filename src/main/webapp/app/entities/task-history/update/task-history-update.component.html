@@ -1,0 +1,83 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-task-history-heading" data-cy="TaskHistoryCreateUpdateHeading">Create or edit a Task History</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_branch">Branch</label>
+          <input type="text" class="form-control" name="branch" id="field_branch" data-cy="branch" formControlName="branch" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_startDate">Start Date</label>
+          <input type="text" class="form-control" name="startDate" id="field_startDate" data-cy="startDate" formControlName="startDate" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_endDate">End Date</label>
+          <input type="text" class="form-control" name="endDate" id="field_endDate" data-cy="endDate" formControlName="endDate" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_personalInfo">Personal Info</label>
+          <select
+            class="form-control"
+            id="field_personalInfo"
+            data-cy="personalInfo"
+            name="personalInfo"
+            formControlName="personalInfo"
+            [compareWith]="comparePersonalInfo"
+          >
+            <option [ngValue]="null"></option>
+            @for (personalInfoOption of personalInfosCollection; track $index) {
+              <option [ngValue]="personalInfoOption">{{ personalInfoOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_applicationStatus">Application Status</label>
+          <select
+            class="form-control"
+            id="field_applicationStatus"
+            data-cy="applicationStatus"
+            name="applicationStatus"
+            formControlName="applicationStatus"
+            [compareWith]="compareApplicationStatus"
+          >
+            <option [ngValue]="null"></option>
+            @for (applicationStatusOption of applicationStatusesCollection; track $index) {
+              <option [ngValue]="applicationStatusOption">{{ applicationStatusOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

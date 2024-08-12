@@ -1,0 +1,44 @@
+{
+  "annotations": {
+    "changelogDate": "20240812155019"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "updatedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "updatedAt",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deletedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deletedAt",
+      "fieldType": "String"
+    }
+  ],
+  "name": "ApplicationStatus",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no"
+}
