@@ -1,0 +1,44 @@
+{
+  "annotations": {
+    "changelogDate": "20240812154212"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "cardCode",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "cardName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "updatedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "updatedAt",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "deletedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deletedAt",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "CardType",
+  "pagination": "infinite-scroll",
+  "relationships": [],
+  "searchEngine": "no"
+}

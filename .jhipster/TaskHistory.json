@@ -1,0 +1,39 @@
+{
+  "annotations": {
+    "changelogDate": "20240812154214"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "branch",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "TaskHistory",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "personalInfo",
+      "relationshipName": "personalInfo",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "applicationStatus",
+      "relationshipName": "applicationStatus",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}
