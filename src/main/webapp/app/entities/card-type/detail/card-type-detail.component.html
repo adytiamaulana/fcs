@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (cardType()) {
+      <div>
+        <h2 data-cy="cardTypeDetailsHeading"><span>Card Type</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ cardType()!.id }}</span>
+          </dd>
+          <dt><span>Card Code</span></dt>
+          <dd>
+            <span>{{ cardType()!.cardCode }}</span>
+          </dd>
+          <dt><span>Card Name</span></dt>
+          <dd>
+            <span>{{ cardType()!.cardName }}</span>
+          </dd>
+          <dt><span>Created By</span></dt>
+          <dd>
+            <span>{{ cardType()!.createdBy }}</span>
+          </dd>
+          <dt><span>Updated By</span></dt>
+          <dd>
+            <span>{{ cardType()!.updatedBy }}</span>
+          </dd>
+          <dt><span>Deleted By</span></dt>
+          <dd>
+            <span>{{ cardType()!.deletedBy }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/card-type', cardType()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>
