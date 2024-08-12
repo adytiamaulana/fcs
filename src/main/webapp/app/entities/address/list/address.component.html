@@ -1,0 +1,190 @@
+<div>
+  <h2 id="page-heading" data-cy="AddressHeading">
+    <span>Addresses</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-address"
+        [routerLink]="['/address/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Create a new Address</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (addresses?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span>No Addresses found</span>
+    </div>
+  }
+
+  @if (addresses && addresses.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span>ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="address">
+              <div class="d-flex">
+                <span>Address</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="country">
+              <div class="d-flex">
+                <span>Country</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="province">
+              <div class="d-flex">
+                <span>Province</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="city">
+              <div class="d-flex">
+                <span>City</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="district">
+              <div class="d-flex">
+                <span>District</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="village">
+              <div class="d-flex">
+                <span>Village</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="postalCode">
+              <div class="d-flex">
+                <span>Postal Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="telephone">
+              <div class="d-flex">
+                <span>Telephone</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span>Created By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdAt">
+              <div class="d-flex">
+                <span>Created At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="updatedBy">
+              <div class="d-flex">
+                <span>Updated By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="updatedAt">
+              <div class="d-flex">
+                <span>Updated At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="deletedBy">
+              <div class="d-flex">
+                <span>Deleted By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="deletedAt">
+              <div class="d-flex">
+                <span>Deleted At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (address of addresses; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/address', address.id, 'view']">{{ address.id }}</a>
+              </td>
+              <td>{{ address.address }}</td>
+              <td>{{ address.country }}</td>
+              <td>{{ address.province }}</td>
+              <td>{{ address.city }}</td>
+              <td>{{ address.district }}</td>
+              <td>{{ address.village }}</td>
+              <td>{{ address.postalCode }}</td>
+              <td>{{ address.telephone }}</td>
+              <td>{{ address.createdBy }}</td>
+              <td>{{ address.createdAt | formatMediumDate }}</td>
+              <td>{{ address.updatedBy }}</td>
+              <td>{{ address.updatedAt | formatMediumDate }}</td>
+              <td>{{ address.deletedBy }}</td>
+              <td>{{ address.deletedAt | formatMediumDate }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/address', address.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline">View</span>
+                  </a>
+
+                  <a [routerLink]="['/address', address.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(address)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
