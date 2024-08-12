@@ -1,0 +1,149 @@
+<div>
+  <h2 id="page-heading" data-cy="TaskHistoryHeading">
+    <span>Task Histories</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-task-history"
+        [routerLink]="['/task-history/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Create a new Task History</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (taskHistories?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span>No Task Histories found</span>
+    </div>
+  }
+
+  @if (taskHistories && taskHistories.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span>ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="branch">
+              <div class="d-flex">
+                <span>Branch</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="startDate">
+              <div class="d-flex">
+                <span>Start Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="endDate">
+              <div class="d-flex">
+                <span>End Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="personalInfo.id">
+              <div class="d-flex">
+                <span>Personal Info</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="applicationStatus.id">
+              <div class="d-flex">
+                <span>Application Status</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (taskHistory of taskHistories; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/task-history', taskHistory.id, 'view']">{{ taskHistory.id }}</a>
+              </td>
+              <td>{{ taskHistory.branch }}</td>
+              <td>{{ taskHistory.startDate | formatMediumDatetime }}</td>
+              <td>{{ taskHistory.endDate | formatMediumDatetime }}</td>
+              <td>
+                @if (taskHistory.personalInfo) {
+                  <div>
+                    <a [routerLink]="['/personal-info', taskHistory.personalInfo.id, 'view']">{{ taskHistory.personalInfo.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (taskHistory.applicationStatus) {
+                  <div>
+                    <a [routerLink]="['/application-status', taskHistory.applicationStatus.id, 'view']">{{
+                      taskHistory.applicationStatus.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/task-history', taskHistory.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline">View</span>
+                  </a>
+
+                  <a [routerLink]="['/task-history', taskHistory.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(taskHistory)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (taskHistories && taskHistories.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>
