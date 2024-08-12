@@ -1,0 +1,68 @@
+{
+  "annotations": {
+    "changelogDate": "20240812140330"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "birthDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "branch",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "updatedAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "deletedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deletedAt",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "PersonalInfo",
+  "relationships": [
+    {
+      "otherEntityName": "address",
+      "relationshipName": "address",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "cardType",
+      "relationshipName": "cardType",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}
