@@ -1,0 +1,59 @@
+entity PersonalInfo {
+	name String
+	gender String
+	birthDate String
+	telephone String
+	createdBy String
+	updatedBy String
+    deletedBy String
+}
+
+entity Address {
+	address String
+	country String
+	province String
+	city String
+	district String
+	village String
+	postalCode Integer
+	telephone String
+	createdBy String
+	updatedBy String
+    deletedBy String
+}
+
+entity CardType {
+    cardCode Integer
+    cardName String
+	createdBy String
+	updatedBy String
+    deletedBy String
+}
+
+entity ApplicationStatus {
+    code String
+    status String
+	createdBy String
+	updatedBy String
+    deletedBy String
+}
+
+entity TaskHistory {
+	branch String
+	startDate String
+	endDate String
+}
+
+relationship OneToOne {
+  PersonalInfo{address} to Address
+  PersonalInfo{cardType} to CardType
+  TaskHistory{personalInfo} to PersonalInfo
+  TaskHistory{applicationStatus} to ApplicationStatus
+}
+
+// Set pagination options
+paginate CardType, ApplicationStatus, TaskHistory with infinite-scroll
+paginate ApplicationStatus, TaskHistory with pagination
+
+// Set service options
+// service all with serviceImpl
